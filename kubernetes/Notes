@@ -1,0 +1,37 @@
+kubectl 
+kubectl run hello-minikube
+kubectl cluster-info
+kubectl get nodes
+
+pod
+------
+
+kubectl run nginx --image nginx
+kubectl get pods
+kubectl describe pod nginx
+kubectl get pods -o wide
+kubectl describe pod podname
+kubectl get pods -o wide //to get full pod details
+
+kubectl run redis --image=iname --dry-run=client -o yaml > pod.yaml
+kubectl apply -f pod.yaml //to run yaml file 
+
+
+kubectl apply -f yamlfilename
+
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  labels:
+    tier: db-tier
+spec:
+  containers:
+    - name: postgres
+      image: postgres
+      env:
+        -  name: POSTGRES_PASSWORD
+           value: mysecretpassword
