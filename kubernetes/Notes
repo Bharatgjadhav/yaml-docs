@@ -45,6 +45,25 @@ kubectl create -f deployment.yaml
 kubectl get deployments
 kubectl get pods 
 kubectl describe deployment myapp-deployment
+kubectl get deployment
+kubectl get deploy
+
+kubectl scale deployment --replicas=3 httpd-frontend
+kubectl get deployments.apps httpd-frontend 
+
+Dedployment strategy
+Recreate
+Rolling Update
+
+create,get,update,status,rollback
+
+kubectl create -f deployment yaml file
+kubectl get deployments
+kubectl apply -f deployment yaml file
+kubectl set image deployment/myapp-deployment nginx=nginx:1.9.1
+kubectl rollout status deployment/myapp-deployment
+kubectl rollout history deployment/myapp-deployment
+kubectl rollout undo deployment/myapp-deployment
 
 
 
