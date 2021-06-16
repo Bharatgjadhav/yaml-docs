@@ -15,10 +15,36 @@ kubectl get pods -o wide //to get full pod details
 
 kubectl run redis --image=iname --dry-run=client -o yaml > pod.yaml
 kubectl apply -f pod.yaml //to run yaml file 
+kubectl edit pod redis
 
 
 kubectl apply -f yamlfilename
 
+
+kubectl create -f filename create replica set
+
+kubectl get replicaset
+
+kubectl delete replicaset 
+kubectl replace -f 
+kubectl scale  -replicas=6 -f  yaml file name 
+
+kubectl scale replicaset replicasetName --replicas=2
+
+kubectl describe replicaset replicasetname
+kubectl edit replicaset replicasetName
+
+
+kubectk get rs
+
+Deployment
+-----------------
+kubectl get all 
+
+kubectl create -f deployment.yaml
+kubectl get deployments
+kubectl get pods 
+kubectl describe deployment myapp-deployment
 
 
 
@@ -35,3 +61,9 @@ spec:
       env:
         -  name: POSTGRES_PASSWORD
            value: mysecretpassword
+
+Replication controllers   //old technology
+-High availability
+-Load balancing and scaling  
+
+Replica set //New technology
