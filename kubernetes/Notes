@@ -51,6 +51,7 @@ kubectl get deploy
 kubectl scale deployment --replicas=3 httpd-frontend
 kubectl get deployments.apps httpd-frontend 
 
+
 Dedployment strategy
 Recreate
 Rolling Update
@@ -86,3 +87,107 @@ Replication controllers   //old technology
 -Load balancing and scaling  
 
 Replica set //New technology
+
+
+Service
+--------------------
+*NodePort
+-external access to the application 
+- uses random algorithm 
+
+
+*ClusterIP
+*LoadBalancer
+
+kubectl create -f Service file yaml
+kubectl get Services
+minikube service servicename --url
+kubectl describe service kubernetes
+
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: myapp
+spec:
+  type:
+  ports:
+      - port: 80
+        targetPort: 80
+  selector: 
+
+
+  apiVersion: v1
+kind: Service
+metadata: 
+    name: image-processing
+    labels:
+        app: myapp
+spec:
+    # type: clusterIP
+    ports:
+      - port: 80
+        targetport: 8080
+    selector:
+      tier: backend
+    
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-processing
+  labels:
+    app: myapp
+spec:
+  # type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    tier: backend
+
+
+
+    apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: webapp-service
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodeport: 30080
+  selector:
+    name: simple-webapp
+status:
+  loadBalancer: {}
+
+
+
+  root@controlplane:~# cat svc.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: webapp-service
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30080
+  selector:
+    name: simple-webapp
+  type: NodePort
+status:
+  loadBalancer: {}
+
+
+  kubectl expose deployment simple-webapp-deployment --name=webapp-service
+   --target-port=8080 --type=NodePort --port=8080 --dry-run=client -o yaml > svc.yaml
