@@ -1,0 +1,43 @@
+By default docker doesn't listen to stdin
+-i :Interactive mode
+-t
+-p : For port mapping 
+
+docker run -v /opt/datadir:/var/lib/mysql mysql
+
+docker inspect container name
+
+docker log container name //To view detached mode process in details 
+
+docker run ubuntu cat /etc/*release*
+
+keep alive for 1000sec && Run container in background with -d option 
+
+docker run -d ubuntu sleep 1000
+
+
+To run container In  foreground
+ 
+docker attach containerID
+
+Docker history image name 
+
+
+bharatjadhav04
+/
+secondtest
+
+
+
+If anyone else gets here:
+Be sure to build your code first with your username/repo before trying to push it.
+
+Example:
+docker build -t <username>/<repo>:<tag> .
+Then you can push
+docker push <username>/<repo>:<tag>
+
+Hope this helps.
+
+
+sudo docker push bharatjadhav04/my-simple-webapp:myfirstimage
