@@ -1,0 +1,17 @@
+Gitlab architecture
+Gitlab runner=> artifacts 
+
+CI
+--------
+code:
+- build
+- code quality
+- tests
+- package 
+
+CD
+---
+- Review/Text
+- staging 
+- production 
+
