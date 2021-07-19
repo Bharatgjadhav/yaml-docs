@@ -4,3 +4,6 @@ scaling
 
 features:
 Azure security center
+Azure sentinel 
+Azure key vault: secure store and access secrets 
+Azure active directory 
