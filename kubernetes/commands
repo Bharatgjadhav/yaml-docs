@@ -1,0 +1,118 @@
+To check all possible property in command line(options)
+-------------
+kubectl explain replicaset --recursive| less
+kubectl explain replicaset --recursive| grep -A5 toleration
+
+
+
+
+important Commands
+--------------------
+
+kubectl describe node kubemaster | grep -t taint 
+kubectl get deployments blue -o yaml > blue.yaml
+
+taint & tollerent 
+-------------
+
+Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule:
+
+- kubectl taint node node01 spray=mortein:NoSchedule
+
+spray=mortein:NoSchedule
+
+kubectl run bee --image=nginx  --dry-run -o yaml > bee.yaml   //create pod
+kubectl run bee --image=nginx  --dry-run=client -o yaml > bee.yaml  //create yaml file
+kubectl taint node controlplane node-role.kubernetes.io/master:NoSchedule-  // to remove taint on node add - at the end 
+
+NodeSelector
+--------
+- NodeAffinity
+kubectl get nodes --show-labels
+kubectl label nodes node01  color=blue //Label nodes
+
+
+Shortcut Commands:
+--------------
+
+kubectl get pods --show-labels
+kubectl get pods -l env=dev --no-headers | wc -l
+kubectl get pods -l bu=finance --no-headers | wc -l
+kubectl get all -l env=prod --no-headers | wc -l
+kubectl get pods -l env=prod,bu=finance,tier=frontend 
+
+
+Deployment
+------------
+kubectl create deployment blue --image=nginx
+kubectl scale deployment blue --replicas=3
+
+pods
+-------
+IMPERATIVE COMMANDS
+kubectl run nginx-pod --image=nginx:alpine
+kubectl run redis --image=redis:alpine --labels=tier=db
+ kubectl expose pod redis --name redis-service --port 6379 --port 6379
+ kubectl create deployment webapp --image=kodekloud/webapp-color
+ kubectl scale deployment --replicas=3 webapp
+ kubectl run custom-nginx --image=nginx --port 8080
+ kubectl create namespace dev-ns
+  kubectl create deployment redis-deploy --image=redis --namespace=dev-ns
+kubectl scale deployment redis-deploy --replicas=2 --namespace=dev-ns
+kubectl run httpd --image=httpd:alpine --port 80 --expose --dry-run=client -o yaml
+
+
+
+kubectl run redis --image=redis --dry-run=client -o yaml > pod.yaml
+kubectl get pods --all-namespaces | grep blue
+
+kubectl create deployment --image=httpd:2.4-alpine httpd-frontend
+kubectl scale deployment --replicas=3 httpd-frontend 
+
+
+kubectl get  all
+
+https://kubernetes.io/docs/reference/kubectl/conventions/
+
+Create an NGINX Pod
+
+kubectl run nginx --image=nginx
+
+Generate POD Manifest YAML file (-o yaml). Don't create it(--dry-run)
+
+kubectl run nginx --image=nginx --dry-run=client -o yaml
+
+Create a deployment
+
+kubectl create deployment --image=nginx nginx
+
+Generate Deployment YAML file (-o yaml). Don't create it(--dry-run)
+
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+
+Generate Deployment YAML file (-o yaml). Don't create it(--dry-run) with 4 Replicas (--replicas=4)
+
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml > nginx-deployment.yaml
+
+Save it to a file, make necessary changes to the file (for example, adding more replicas) and then create the deployment.
+
+kubectl create -f nginx-deployment.yaml
+
+OR
+
+In k8s version 1.19+, we can specify the --replicas option to create a deployment with 4 replicas.
+
+kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
+
+
+
+kubectl scale replicaset --replicas=2 new-replica-set 
+
+kubectl create namespace namespacename
+
+kubectl get pods --namespace=dev ,default , prod
+
+kubectl get pods --all-namespace
+
+kubectl config set-context $(kubectl config current context) --namespace=dev  // to set default 
+kubectl get ns --no-headers | wc -l
