@@ -1,3 +1,12 @@
+A Docker image is a private file system just for your container.
+ It provides all the files and code your container needs
+
+ Start a container based on the image you built in the previous step.
+  Running a container launches your application with private resources,
+   securely isolated from the rest of your machine.
+
+
+
 By default docker doesn't listen to stdin
 -i :Interactive mode
 -t
@@ -124,3 +133,23 @@ docker network inspect wp-mysql-network
 docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db --network wp-mysql-network mysql:5.6
 
 docker run --network=wp-mysql-network -e DB_Host=mysql-db -e DB_Password=db_pass123 -p 38080:8080 --name webapp --link mysql-db:mysql-db -d kodekloud/simple-webapp-mysql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

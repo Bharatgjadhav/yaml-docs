@@ -1,9 +1,56 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  creationTimestamp: null
+  labels:
+    app: red
+  name: red
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: red
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: red
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: Exists
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
-  creationTimestamp: "2021-11-16T12:16:12Z"
+  creationTimestamp: "2021-11-17T14:46:04Z"
   generation: 2
   labels:
     app: blue
@@ -48,7 +95,7 @@ metadata:
             f:terminationGracePeriodSeconds: {}
     manager: kubectl-create
     operation: Update
-    time: "2021-11-16T12:16:12Z"
+    time: "2021-11-17T14:46:04Z"
   - apiVersion: apps/v1
     fieldsType: FieldsV1
     fieldsV1:
@@ -82,11 +129,11 @@ metadata:
         f:updatedReplicas: {}
     manager: kube-controller-manager
     operation: Update
-    time: "2021-11-16T12:16:40Z"
+    time: "2021-11-17T14:46:29Z"
   name: blue
   namespace: default
-  resourceVersion: "1712"
-  uid: 18a5eb45-03d5-4d55-b2f3-b7abbf55fa1f
+  resourceVersion: "1410"
+  uid: acbe70fa-4490-4e50-ae17-9c60c8e18af7
 spec:
   progressDeadlineSeconds: 600
   replicas: 3
@@ -113,7 +160,7 @@ spec:
               - key: color
                 operator: In
                 values:
-                - blue    
+                - blue
       containers:
       - image: nginx
         imagePullPolicy: Always
@@ -129,98 +176,19 @@ spec:
 status:
   availableReplicas: 3
   conditions:
-  - lastTransitionTime: "2021-11-16T12:16:40Z"
-    lastUpdateTime: "2021-11-16T12:16:40Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2021-11-16T12:16:12Z"
-    lastUpdateTime: "2021-11-16T12:16:40Z"
+  - lastTransitionTime: "2021-11-17T14:46:04Z"
+    lastUpdateTime: "2021-11-17T14:46:08Z"
     message: ReplicaSet "blue-7bb46df96d" has successfully progressed.
     reason: NewReplicaSetAvailable
     status: "True"
     type: Progressing
+  - lastTransitionTime: "2021-11-17T14:46:29Z"
+    lastUpdateTime: "2021-11-17T14:46:29Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
   observedGeneration: 2
   readyReplicas: 3
   replicas: 3
   updatedReplicas: 3
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  creationTimestamp: null
-  labels:
-    app: red
-  name: red
-spec:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: node-role.kubernetes.io/master
-            operator: Exists  
-  replicas: 3
-  selector:
-    matchLabels:
-      app: red
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: red
-    spec:
-      containers:
-      - image: nginx
-        name: nginx
-        resources: {}
-status: {}
-
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  creationTimestamp: null
-  labels:
-    app: red
-  name: red
-spec:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: node-role.kubernetes.io/master
-            operator: Exists 
-  replicas: 1
-  selector:
-    matchLabels:
-      app: red
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: red
-    spec:
-      containers:
-      - image: nginx
-        name: nginx
