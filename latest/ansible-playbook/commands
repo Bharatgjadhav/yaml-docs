@@ -1,0 +1,2 @@
+ ansible-playbook playbook-ping.yml -i inventory.txt
+ ansible-playbook copy-playbook.yaml -i inventory.txt

@@ -1,0 +1,129 @@
+kubectl create cm webapp-color --from-literal=APP_COLOR=darkblue
+
+controlplane ~ ➜  kubectl explain pods --recursive | grep envFrom
+         envFrom        <[]Object>
+         envFrom        <[]Object>
+         envFrom        <[]Object> 
+
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2021-12-13T07:49:35Z"
+  labels:
+    name: webapp-color
+  name: webapp-color
+  namespace: default
+  resourceVersion: "761"
+  uid: 121bd31a-c508-4aeb-be12-892354ba9588
+spec:
+  containers:
+  - envFrom:
+   - configMapRef:
+       name: webapp-config-map
+    image: kodekloud/webapp-color
+    imagePullPolicy: Always
+    name: webapp-color
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rrbbp
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: controlplane
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-rrbbp
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2021-12-13T07:49:35Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2021-12-13T07:49:47Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2021-12-13T07:49:47Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2021-12-13T07:49:35Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://8f58c70992a34f034c751000355171d6a785d585af87602135e4b88de825216a
+    image: docker.io/kodekloud/webapp-color:latest
+    imageID: docker.io/kodekloud/webapp-color@sha256:99c3821ea49b89c7a22d3eebab5c2e1ec651452e7675af243485034a72eb1423
+    lastState: {}
+    name: webapp-color
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2021-12-13T07:49:47Z"
+  hostIP: 172.25.0.77
+  phase: Running
+  podIP: 10.42.0.9
+  podIPs:
+  - ip: 10.42.0.9
+  qosClass: BestEffort
+  startTime: "2021-12-13T07:49:35Z"
+
+
+
+
+  apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: webapp-color
+  name: webapp-color
+  namespace: default
+spec:
+  containers:
+  - envFrom:
+    - configMapRef:
+         name: webapp-config-map
+    image: kodekloud/webapp-color
+    name: webapp-color

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  nodeName: node01    //specify node name 
+  containers:
+  -  image: nginx 
+     name: nginx

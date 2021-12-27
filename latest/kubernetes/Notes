@@ -1,0 +1,202 @@
+kubectl 
+kubectl run hello-minikube
+kubectl cluster-info
+kubectl get nodes
+
+pod
+------
+
+kubectl run nginx --image nginx
+kubectl get pods
+kubectl describe pod nginx
+kubectl get pods -o wide
+kubectl describe pod podname
+kubectl get pods -o wide //to get full pod details
+
+kubectl run redis --image=iname --dry-run=client -o yaml > pod.yaml
+kubectl apply -f pod.yaml //to run yaml file 
+kubectl edit pod redis
+
+
+kubectl apply -f yamlfilename
+
+
+kubectl create -f filename create replica set
+
+kubectl get replicaset
+
+kubectl delete replicaset 
+kubectl replace -f 
+kubectl scale  -replicas=6 -f  yaml file name 
+
+kubectl scale replicaset replicasetName --replicas=2
+
+kubectl describe replicaset replicasetname
+kubectl edit replicaset replicasetName
+
+
+kubectk get rs
+
+Deployment
+-----------------
+kubectl get all 
+
+kubectl create -f deployment.yaml
+kubectl get deployments
+kubectl get pods 
+kubectl describe deployment myapp-deployment
+kubectl get deployment
+kubectl get deploy
+
+kubectl scale deployment --replicas=3 httpd-frontend
+kubectl get deployments.apps httpd-frontend 
+
+
+Dedployment strategy
+Recreate
+Rolling Update
+
+create,get,update,status,rollback
+
+kubectl create -f deployment yaml file
+kubectl get deployments
+kubectl apply -f deployment yaml file
+kubectl set image deployment/myapp-deployment nginx=nginx:1.9.1
+kubectl rollout status deployment/myapp-deployment
+kubectl rollout history deployment/myapp-deployment
+kubectl rollout undo deployment/myapp-deployment
+
+wildcard
+kubectl create -f .
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  labels: 
+    tier: db-tier
+spec:
+  containers:
+    - name: postgres
+      image: postgres
+      env:
+        -  name: POSTGRES_PASSWORD
+           value: mysecretpassword
+
+Replication controllers   //old technology
+-High availability
+-Load balancing and scaling  
+
+Replica set //New technology
+
+
+Service
+--------------------
+*NodePort
+-external access to the application 
+- uses random algorithm 
+
+
+*ClusterIP
+*LoadBalancer
+
+kubectl create -f Service file yaml
+kubectl get Services
+minikube service servicename --url
+kubectl describe service kubernetes
+
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: myapp
+spec:
+  type:
+  ports:
+      - port: 80
+        targetPort: 80
+  selector: 
+
+
+  apiVersion: v1
+kind: Service
+metadata: 
+    name: image-processing
+    labels:
+        app: myapp
+spec:
+    # type: clusterIP
+    ports:
+      - port: 80
+        targetport: 8080
+    selector:
+      tier: backend
+    
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-processing
+  labels:
+    app: myapp
+spec:
+  # type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    tier: backend
+
+
+
+    apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: webapp-service
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodeport: 30080
+  selector:
+    name: simple-webapp
+status:
+  loadBalancer: {}
+
+
+
+  root@controlplane:~# cat svc.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: webapp-service
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30080
+  selector:
+    name: simple-webapp
+  type: NodePort
+status:
+  loadBalancer: {}
+
+
+  kubectl expose deployment simple-webapp-deployment --name=webapp-service
+   --target-port=8080 --type=NodePort --port=8080 --dry-run=client -o yaml > svc.yaml
+
+
+
+
+   Kathakali Basu11:261
+   It is the thought process of an organization that serves as the backbone of its being

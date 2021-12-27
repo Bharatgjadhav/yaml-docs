@@ -1,0 +1,249 @@
+stages:
+
+  - prep
+
+  - build
+
+  - test
+
+Build car:
+
+  stage: build
+
+  script:
+
+    - cd build
+
+    - echo "Chassis" >> car.txt
+
+    - echo "Engine" >> car.txt
+
+    - echo "Wheels" >> car.txt
+
+  artifacts:
+
+    paths:
+
+      - /
+
+    expire_in: 1 days
+
+Test the car:
+
+  stage: test
+
+  script:
+
+    - ls
+
+    - test -f build/car.txt
+
+    - cat build/car.txt
+
+    - cd build
+
+    - grep "Chassis" car.txt
+
+
+stages:
+
+  - prep
+
+  - build
+
+  - test
+
+prepare the car:
+
+  stage: prep
+
+  script:
+
+   - mkdir build
+
+   - cd build
+
+   - touch car.txt 
+
+
+
+Build car:
+
+  stage: build
+
+  script:
+
+    - cd build
+
+    - echo "Chassis" >> car.txt
+
+    - echo "Engine" >> car.txt
+
+    - echo "Wheels" >> car.txt
+
+  artifacts:
+
+    paths:
+
+      - /
+
+Test the car:
+
+  stage: test
+
+  script:
+
+    - ls
+
+    - test -f build/car.txt
+
+    - cat build/car.txt
+
+    - cd build
+
+    - grep "Chassis" car.txt
+
+
+stages:
+
+  - prep
+
+  - build
+
+  - test
+
+prepare the car:
+
+  stage: prep
+
+  script:
+
+   - mkdir build
+
+   - cd build
+
+   - touch car.txt 
+
+  artifacts:
+
+    paths:
+
+      - /
+
+Build car:
+
+  stage: build
+
+  script:
+
+    - cd build
+
+    - echo "Chassis" >> car.txt
+
+    - echo "Engine" >> car.txt
+
+    - echo "Wheels" >> car.txt
+
+  artifacts:
+
+    paths:
+
+      - /
+
+Test the car:
+
+  stage: test
+
+  script:
+
+    - ls
+
+    - test -f build/car.txt
+
+    - cat build/car.txt
+
+    - cd build
+
+    - grep "Chassis" car.txt
+
+
+
+stages:
+
+  - prep
+
+  - build
+
+  - test
+
+prepare the car:
+
+  stage: prep
+
+  script:
+
+   - mkdir build
+
+   - cd build
+
+   - touch car.txt 
+
+  artifacts:
+
+    paths:
+
+      - /
+
+author:
+
+stage: build
+
+script:
+
+   - mkdir meta
+
+   - cd meta
+
+   - echo $GITLAB_USER_NAME > author.txt
+
+artifacts:
+
+    paths:
+
+      - /     
+
+Build car:
+
+  stage: build
+
+  script:
+
+    - cd build
+
+    - echo "Chassis" >> car.txt
+
+    - echo "Engine" >> car.txt
+
+    - echo "Wheels" >> car.txt
+
+  artifacts:
+
+    paths:
+
+      - /
+
+Test the car:
+
+  stage: test
+
+  script:
+
+    - ls
+
+    - test -f build/car.txt
+
+    - cat build/car.txt
+
+    - cd build
+
+    - grep "Chassis" car.txt

@@ -1,0 +1,5 @@
+check kubelet.service
+kubeconfig.yaml
+
+
+// used to set master node components instead of setting one by one components since it's static pod it will recreate the pods

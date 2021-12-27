@@ -1,0 +1,8 @@
+kubectl drain node01 --ignore-daemonsets
+
+kubectl get pods -o wide
+
+
+Do not drain node01, instead use the kubectl cordon node01 command. 
+This will ensure that no new pods are scheduled on this node and the
+ existing pods will not be affected by this operation
